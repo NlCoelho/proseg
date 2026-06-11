@@ -1,231 +1,292 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@4.1.3/tsparticles.confetti.bundle.min.js"></script>
-<title>Painel Atitude Segura</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@4.1.3/tsparticles.confetti.bundle.min.js"></script>
+    <title>Painel Atitude Segura</title>
 
-<style>
+    <style>
+      /* Fonte Normal */
+      @font-face {
+        font-family: "DS-DIGITAL";
+        src: url("ds_digital/DS-DIGI.TTF") format("truetype");
+        font-weight: normal;
+        font-style: normal;
+      }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+      /* Fonte Negrito (Bold) */
+      @font-face {
+        font-family: "DS-DIGITAL";
+        src: url("ds_digital/DS-DIGIB.TTF") format("truetype");
+        font-weight: bold;
+        font-style: normal;
+      }
 
-body{
-    background:#000;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    min-height:100vh;
-    font-family:Segoe UI, Arial, sans-serif;
-}
+      /* Fonte Itálico */
+      @font-face {
+        font-family: "DS-DIGITAL";
+        src: url("ds_digital/DS-DIGII.TTF") format("truetype");
+        font-weight: normal;
+        font-style: italic;
+      }
 
-.painel{
-    position:relative;
-    width:max(100vw);
-    height: 100vh;
-    aspect-ratio:1600/900;
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-    background-image:url("WhatsApp Image 2026-06-02 at 00.07.54.jpeg");
-    background-size:contain;
-    background-repeat:no-repeat;
-    background-position:center;
-}
+      body {
+        background: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        min-width: 100vw;
+        font-family: Segoe UI, Arial, sans-serif;
+      }
 
-/* Número de dias */
+      .painel {
+        position: relative;
+        width: 100vw;
+        height: 56.25vw;
+        max-height: 100vh;
+        max-width: 177.78vh;
 
-.dias{
-    position:absolute;
-    left:49%;
-    top:8.7vh;
-    font-style: italic;
-    transform:translateX(-50%);
+        background-image: url("WhatsApp Image 2026-06-10 at 23.54.03.jpeg");
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
 
-    color:#d9b178;
+      /* Número de dias */
 
-    font-size:13vh;
-    font-weight:700;
+      .dias {
+        position: absolute;
+        left: 49%;
+        top: 8.7vh;
+        font-style: italic;
+        transform: translateX(-50%);
 
-    text-shadow:
-        0 0 8px rgba(217,177,120,.6),
-        0 0 20px rgba(217,177,120,.4);
+        color: #fff;
 
-    letter-spacing:2px;
-}
+        font-size: 14vh;
+        font-weight: 900;
 
-/* Data */
+        text-shadow: 0 0 2px rgba(255, 255, 255, 0.4), 0 0 6px rgba(255, 255, 255, 0.7);
 
-.data,  .dia_semana {
-    position:absolute;
+        letter-spacing: 2px;
+      }
 
-    left:49.6%;
-    top:53%;
-    line-height: 1.1;
-    
-    transform:translateX(-50%);
+      /* Data */
 
-    color:#d9b178;
+      .data,
+      .dia_semana {
+        font-family: "DS-DIGITAL";
+        letter-spacing: 5px;
 
-    text-align:center;
+        line-height: 1.1;
 
-    font-size: clamp(1rem, 2.7vw, 2.2rem);
+        color: #363636;
 
-    font-weight:600;
+        text-align: center;
 
-    text-shadow:
-        0 0 5px rgba(217,177,120,.4);
-}
+        font-size: clamp(1rem, 3.2vw, 3.5rem);
 
-.dia_semana{
-    position:absolute;
-    left:49.6%;
-    top:58.6%;
-    color: #8c8c8a;
-    letter-spacing: 2px;
+        font-weight: 900;
 
-    font-size:clamp(1vw,1.77vw,7vw);
+        text-shadow: 0 0 1px rgba(215, 215, 215, 0.4), 0 0 3px rgba(225, 225, 225, 0.8);
+      }
 
-    font-weight:400;
+      .dia_semana1 {
+        top: 71.6%;
+        color: #eee;
+        letter-spacing: 2px;
 
-    text-shadow:
-        2px 0 5px rgba(60,65,69,.8);
-}
+        font-size: clamp(1vw, 1.75vw, 7vw);
 
-/* Hora */
+        font-weight: 400;
+      }
 
-.hora{
-    position:absolute;
-    font-family: 'DS-DIGITAL';
-    left:49.5%;
-    font-size:clamp(5px,7vw,10vw);
-    text-shadow:
-        0px 0px 5px rgba(90,50,10,.9);
-    top:72.8%;
+      /* Hora */
 
-    transform:translateX(-50%);
-    
-    color:#d9b178;
+      .hora {
+        font-family: "DS-DIGITAL";
 
-    text-align:center;
+        font-size: clamp(5px, 9.8vw, 10vw);
+        text-shadow: 0 0 3px rgba(55, 55, 55, 0.4), 0 0 8px rgba(55, 55, 55, 0.8);
 
-    
-}
+        font-weight: 500;
+        color: #fff;
 
-div#horaAtual {
-    display: inline-flex;
-    justify-content: center;
-}
+        text-align: center;
+      }
 
-span#sep{
-    padding-left: 4.5px;
-    transform: translateY(-5px);		
-}
+      .quadro {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        top: 55%;
+        left: 49.2%;
+        transform: translateX(-50%);
+        width: 20vw;
+        height: 25vh;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+      }
 
-@font-face{
-    font-family: 'DS-DIGITAL';
-    src: url('ds_digital/DS-DIGI.TTF') format('truetype'),
-    src: url('ds_digital/DS-DIGII.TTF') format('truetype'),
-    src: url('ds_digital/DS-DIGIB.TTF') format('truetype'),
-    src: url('ds_digital/DS-DIGIT.TTF') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
+      div#horaAtual {
+        display: inline-flex;
+        justify-content: center;
+      }
 
-/* Ajustes para telas menores */
+      span#sep {
+        padding-left: 4.5px;
+        transform: translateY(-5px);
+      }
 
-@media (max-width:1000px){
+      /* Ajustes para telas menores */
 
-    .dias{
-        top:10%;
-    }
+      @media (max-width: 910px) {
+        body {
+          transform: rotate(90deg);
+        }
 
-    .data{
-        width:25%;
-        top:55%;
-    }
+        .dias {
+          top: 9%;
+          font-size: clamp(2rem, 8.3vw, 9rem);
+        }
+        .quadro {
+          width: 21%;
+          height: 25%;
+        }
+        .data {
+          width: 21%;
+          top: 80%;
+          left: 50%;
+          font-size: clamp(1rem, 2vw, 3rem);
+        }
 
-    .hora{
-        width:25%;
-        top:73%;
-	font-size:clamp(10px,20vw,55px);
-    }
-}
+        .hora {
+          width: 25%;
+          top: 63%;
+          font-size: clamp(1rem, 10vw, 5rem);
+        }
+      }
 
-</style>
-</head>
-<body>
+      @media (max-width: 480px) {
+        body {
+          transform: rotate(90deg);
+        }
 
-<div class="painel">
+        .dias {
+          top: 9%;
+          font-size: clamp(1rem, 8.3vw, 9rem);
+        }
+        .quadro {
+          width: 21%;
+          height: 30%;
+        }
+        .data {
+          width: 21%;
+          top: 80%;
+          left: 50%;
+          font-size: clamp(1rem, 2vw, 3rem);
+        }
 
-    <div class="dias" id="dias">0</div>
-    
-    <div class="data" id="dataAtual">01/01/2025</div>
+        .hora {
+          width: 25%;
+          top: 63%;
+          font-size: clamp(1rem, 10vw, 5rem);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="painel">
+      <div class="dias" id="dias">0</div>
+      <div class="quadro" id="quadro">
+        <div class="hora" id="horaAtual">
+          <span id="hh">00</span>
+          <span id="sep">:</span>
+          <span id="mm">00</span>
+        </div>
 
-    <div class="dia_semana" id="dia_semana"></div>	
-    
-    <div class="hora" id="horaAtual">
-        <span id="hh">00</span>
-        <span id="sep">:</span>
-        <span id="mm">00</span>
-    
-    </div>		
-</div>
+        <div class="data" id="dataAtual">01/01/2025</div>
 
-<script>
-// DATA INICIAL DO CONTADOR
-const DATA_INICIAL = new Date("2022-12-14T00:00:00");
+        <div class="dia_semana" id="dia_semana"></div>
+      </div>
+    </div>
 
-function atualizarPainel(){
+    <script>
+      // DATA INICIAL DO CONTADOR
+      const DATA_INICIAL = new Date("2022-12-14T00:00:00");
 
-    const agora = new Date();
+      function atualizarPainel() {
+        const agora = new Date();
 
-    // DATA
-    		
-    document.getElementById("dataAtual").textContent =
-        agora.toLocaleDateString("pt-BR");
-	
-    // DIA SEMANA
-    
-    const diasDaSemana = [
-        'Domingo', 'Segunda-feira', 'Terça-feira', 
-        'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
+        // DATA
+        const options = { day: "2-digit", month: "2-digit" };
+        document.getElementById("dataAtual").textContent = agora.toLocaleDateString("pt-BR", options);
 
-    const hoje = new Date();
+        // HORA
 
-    const numeroDia = hoje.getDay();
-    document.getElementById("dia_semana").textContent = 
-    diasDaSemana[numeroDia].toUpperCase();     
+        document.getElementById("hh").textContent = String(agora.getHours()).padStart(2, "0");
 
+        document.getElementById("mm").textContent = String(agora.getMinutes()).padStart(2, "0");
 
-    // HORA
+        document.getElementById("sep").style.opacity = agora.getSeconds() % 2 === 0 ? "1" : "0";
 
-    document.getElementById("hh").textContent =
-        String(agora.getHours()).padStart(2, "0");
+        // DIA SEMANA
 
-    document.getElementById("mm").textContent =
-        String(agora.getMinutes()).padStart(2, "0");
+        const diasDaSemana = ["Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"];
 
-    document.getElementById("sep").style.opacity =
-        agora.getSeconds() % 2 === 0 ? "1" : "0";
+        const hoje = new Date();
 
-    // DIAS CORRIDOS
-    const diferenca =
-        agora.getTime() - DATA_INICIAL.getTime();
+        const numeroDia = hoje.getDay();
+        document.getElementById("dataAtual").textContent = document.getElementById("dataAtual").textContent + " " + diasDaSemana[numeroDia].substring(0, 3).toUpperCase();
 
-    const dias =
-        Math.floor(diferenca / (1000 * 60 * 60 * 24));
+        // DIAS CORRIDOS
+        const diferenca = agora.getTime() - DATA_INICIAL.getTime();
 
-    document.getElementById("dias").textContent =
-        dias.toLocaleString("pt-BR") + " DIAS";
-}
+        const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
 
-atualizarPainel();
+        document.getElementById("dias").textContent = dias.toLocaleString("pt-BR") + " DIAS";
+      }
 
-setInterval(atualizarPainel,1000);
+      atualizarPainel();
 
-</script>
-</body>
+      setInterval(atualizarPainel, 1000);
+
+      // Armazena a versão inicial da página (ETag ou data de modificação)
+      let hashAtual = null;
+
+      async function checarNovoDeploy() {
+        try {
+          // Faz uma requisição rápida apenas no cabeçalho da página para evitar consumo de dados
+          const resposta = await fetch("https://proseg-pk4b.vercel.app", { method: "HEAD", cache: "no-cache" });
+          console.log(resposta);
+          // A Vercel gera um mapeamento único (ETag ou x-vercel-id) para cada deploy
+          const novoHash = resposta.headers.get("etag") || resposta.headers.get("x-vercel-id");
+
+          if (hashAtual === null) {
+            hashAtual = novoHash;
+          } else if (hashAtual !== novoHash) {
+            // Se o servidor responder com um hash diferente, um novo deploy foi feito!
+            window.location.reload();
+          }
+        } catch (erro) {
+          console.log("Erro ao checar deploy:", erro);
+        }
+      }
+
+      // Executa a checagem de deploy assim que abre e depois a cada 5 minutos (300000ms)
+      setInterval(checarNovoDeploy, 300000);
+    </script>
+  </body>
 </html>
