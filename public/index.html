@@ -64,18 +64,14 @@
 
       .dias {
         position: absolute;
+        white-space: nowrap;
         left: 49%;
-        top: 8.7vh;
+        top: 8%;
         font-style: italic;
         transform: translateX(-50%);
-
         color: #fff;
-
-        font-size: 14vh;
         font-weight: 900;
-
         text-shadow: 0 0 2px rgba(255, 255, 255, 0.4), 0 0 6px rgba(255, 255, 255, 0.7);
-
         letter-spacing: 2px;
       }
 
@@ -83,43 +79,34 @@
 
       .data,
       .dia_semana {
-        font-family: "DS-DIGITAL";
-        letter-spacing: 5px;
-
-        line-height: 1.1;
-
-        color: #363636;
-
+        position: absolute;
+        white-space: nowrap;
+        top: 62%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        height: 50%;
+        letter-spacing: 1px;
+        color: #fffffff3;
         text-align: center;
-
-        font-size: clamp(1rem, 3.2vw, 3.5rem);
-
-        font-weight: 900;
-
-        text-shadow: 0 0 1px rgba(215, 215, 215, 0.4), 0 0 3px rgba(225, 225, 225, 0.8);
-      }
-
-      .dia_semana1 {
-        top: 71.6%;
-        color: #eee;
-        letter-spacing: 2px;
-
-        font-size: clamp(1vw, 1.75vw, 7vw);
-
-        font-weight: 400;
+        font-size: clamp(1rem, 3vw, 5.5rem);
+        font-weight: 500;
+        text-shadow: 0.1px 0.1px 5px rgba(0, 0, 0), 1px 0 0 rgb(0, 0, 0);
       }
 
       /* Hora */
-
       .hora {
         font-family: "DS-DIGITAL";
-
-        font-size: clamp(5px, 9.8vw, 10vw);
-        text-shadow: 0 0 3px rgba(55, 55, 55, 0.4), 0 0 8px rgba(55, 55, 55, 0.8);
-
+        position: absolute;
+        top: 10%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        text-shadow: 3px 3px 7px rgba(0, 0, 0), 2px 0 0 rgb(0, 0, 0);
         font-weight: 500;
-        color: #fff;
-
+        color: #ffffff;
         text-align: center;
       }
 
@@ -129,16 +116,41 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        top: 55%;
+        top: 52%;
         left: 49.2%;
         transform: translateX(-50%);
-        width: 20vw;
-        height: 25vh;
+        width: 21%;
+        height: 33%;
+        font-size: clamp(1rem, 10vw, 7rem);
+        border: 1px solid rgba(223, 217, 217, 0.603);
         border-radius: 14px;
-        background: rgba(255, 255, 255, 0);
-        backdrop-filter: blur(5px);
-        -webkit-backdrop-filter: blur(5px);
+        background: rgba(0, 0, 0, 0.185);
+        backdrop-filter: blur(2px);
+        -webkit-backdrop-filter: blur(2px);
+        overflow: hidden;
       }
+
+.divisor-schaeffler {
+      top: 33.5%;
+      left: 50%;
+      transform: translateX(-50%);
+	    max-width: 45%;
+      height: 2px;
+      position: relative;
+      background: linear-gradient(90deg, transparent, rgba(201, 151, 58, 0.18), #c9973a 50%, rgba(255, 255, 255, 0.18), transparent);
+    }
+
+    .divisor-schaeffler::after {
+      content: "";
+      width: 2.5px;
+      height: 2.5px;
+      border: 1px solid #d2a043;
+      background: #d2a043;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
 
       div#horaAtual {
         display: inline-flex;
@@ -146,63 +158,14 @@
       }
 
       span#sep {
-        padding-left: 4.5px;
         transform: translateY(-5px);
       }
 
       /* Ajustes para telas menores */
 
-      @media (max-width: 910px) {
-        body {
-          transform: rotate(90deg);
-        }
-
+      @media (max-width: 860px) {
         .dias {
-          top: 9%;
-          font-size: clamp(2rem, 8.3vw, 9rem);
-        }
-        .quadro {
-          width: 21%;
-          height: 25%;
-        }
-        .data {
-          width: 21%;
-          top: 80%;
-          left: 50%;
-          font-size: clamp(1rem, 2vw, 3rem);
-        }
-
-        .hora {
-          width: 25%;
-          top: 63%;
-          font-size: clamp(1rem, 10vw, 5rem);
-        }
-      }
-
-      @media (max-width: 480px) {
-        body {
-          transform: rotate(90deg);
-        }
-
-        .dias {
-          top: 9%;
-          font-size: clamp(1rem, 8.3vw, 9rem);
-        }
-        .quadro {
-          width: 21%;
-          height: 30%;
-        }
-        .data {
-          width: 21%;
-          top: 80%;
-          left: 50%;
-          font-size: clamp(1rem, 2vw, 3rem);
-        }
-
-        .hora {
-          width: 25%;
-          top: 63%;
-          font-size: clamp(1rem, 10vw, 5rem);
+          top: 10%;
         }
       }
     </style>
@@ -210,6 +173,9 @@
   <body>
     <div class="painel">
       <div class="dias" id="dias">0</div>
+      
+      <div class="divisor-schaeffler"></div>
+
       <div class="quadro" id="quadro">
         <div class="hora" id="horaAtual">
           <span id="hh">00</span>
@@ -228,6 +194,15 @@
       const DATA_INICIAL = new Date("2022-12-14T00:00:00");
 
       function atualizarPainel() {
+        const pai = document.querySelector(".quadro");
+        const filho = pai.querySelector(".hora");
+        const filho2 = pai.querySelector(".data");
+        const filho3 = document.querySelector(".dias");
+
+        filho.style.fontSize = `${quadro.clientWidth * 0.45}px`;
+        filho2.style.fontSize = `${quadro.clientWidth * 0.14}px`;
+        filho3.style.fontSize = `${quadro.clientWidth * 0.4}px`;
+
         const agora = new Date();
 
         // DATA
@@ -253,40 +228,62 @@
 
         // DIAS CORRIDOS
         const diferenca = agora.getTime() - DATA_INICIAL.getTime();
-
         const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
-
+        if(dias % 100 === 0 && (agora.getHours() % 6 === 0 || agora.toLocaleTimeString('pt-BR') == "00:00:00")){
+          runConfetti();
+          
+        }
         document.getElementById("dias").textContent = dias.toLocaleString("pt-BR") + " DIAS";
       }
 
       atualizarPainel();
-
+      
+      //runConfetti();
+      // Confetti: efeito por 5 segundos, partindo do alto até embaixo
+      function runConfetti() {
+        confetti({
+          duration: 3000,
+          spread: 360,
+          origin: { 
+            x: 0.5, 
+            y: -0.5 
+          },
+          velocity: 0,
+          gravity: 0.5,
+          ticks: 8000,
+        particleCount: 8000,
+        
+      });
+      }
+      
       setInterval(atualizarPainel, 1000);
-
+      // Executa a checagem de deploy assim que abre e depois a cada 5 minutos (300000ms)
+      setInterval(checarNovoDeploy, 120000);
+      
       // Armazena a versão inicial da página (ETag ou data de modificação)
       let hashAtual = null;
 
       async function checarNovoDeploy() {
         try {
           // Faz uma requisição rápida apenas no cabeçalho da página para evitar consumo de dados
-          const resposta = await fetch("https://proseg-pk4b.vercel.app", { method: "HEAD", cache: "no-cache" });
-          console.log(resposta);
+          const local = "https://127.0.0.1:8080/";
+          const production = "https://proseg-nine.vercel.app";
+          
+          const resposta = await fetch(`${production}`, { method: "HEAD", cache: "no-cache" });
           // A Vercel gera um mapeamento único (ETag ou x-vercel-id) para cada deploy
-          const novoHash = resposta.headers.get("etag") || resposta.headers.get("x-vercel-id");
-
+          const novoHash = resposta.headers.get("etag") || resposta.headers.get("x-vercel-id") || resposta.headers.get("last-modified");
+          
           if (hashAtual === null) {
             hashAtual = novoHash;
           } else if (hashAtual !== novoHash) {
             // Se o servidor responder com um hash diferente, um novo deploy foi feito!
-            window.location.reload();
+            window.location.reload(true);
           }
         } catch (erro) {
           console.log("Erro ao checar deploy:", erro);
         }
       }
 
-      // Executa a checagem de deploy assim que abre e depois a cada 5 minutos (300000ms)
-      setInterval(checarNovoDeploy, 300000);
     </script>
   </body>
 </html>
