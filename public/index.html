@@ -54,7 +54,7 @@
         max-height: 100vh;
         max-width: 177.78vh;
 
-        background-image: url("WhatsApp Image 2026-06-10 at 23.54.03.jpeg");
+        background-image: url("./images/WhatsApp\ Image\ 2026-06-22\ at\ 22.19.32.jpeg");
         background-size: 100% 100%;
         background-repeat: no-repeat;
         background-position: center;
@@ -81,7 +81,7 @@
       .dia_semana {
         position: absolute;
         white-space: nowrap;
-        top: 62%;
+        top: 65%;
         left: 50%;
         transform: translateX(-50%);
         width: 100%;
@@ -98,13 +98,13 @@
       .hora {
         font-family: "DS-DIGITAL";
         position: absolute;
-        top: 10%;
+        top: 3%;
         left: 50%;
         transform: translateX(-50%);
         width: 100%;
         height: 100%;
         box-sizing: border-box;
-        text-shadow: 3px 3px 7px rgba(0, 0, 0), 2px 0 0 rgb(0, 0, 0);
+        text-shadow: 3px 3px 7px rgb(0, 0, 0), 2px 0 0 rgb(0, 0, 0);
         font-weight: 500;
         color: #ffffff;
         text-align: center;
@@ -119,38 +119,17 @@
         top: 52%;
         left: 49.2%;
         transform: translateX(-50%);
-        width: 21%;
+        width: 30%;
         height: 33%;
         font-size: clamp(1rem, 10vw, 7rem);
         border: 1px solid rgba(223, 217, 217, 0.603);
         border-radius: 14px;
-        background: rgba(0, 0, 0, 0.185);
+        background: rgba(0, 0, 0, 0.1805);
         backdrop-filter: blur(2px);
         -webkit-backdrop-filter: blur(2px);
         overflow: hidden;
       }
 
-.divisor-schaeffler {
-      top: 33.5%;
-      left: 50%;
-      transform: translateX(-50%);
-	    max-width: 45%;
-      height: 2px;
-      position: relative;
-      background: linear-gradient(90deg, transparent, rgba(201, 151, 58, 0.18), #c9973a 50%, rgba(255, 255, 255, 0.18), transparent);
-    }
-
-    .divisor-schaeffler::after {
-      content: "";
-      width: 2.5px;
-      height: 2.5px;
-      border: 1px solid #d2a043;
-      background: #d2a043;
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%) rotate(45deg);
-    }
 
       div#horaAtual {
         display: inline-flex;
@@ -160,6 +139,7 @@
       span#sep {
         transform: translateY(-5px);
       }
+
 
       /* Ajustes para telas menores */
 
@@ -172,10 +152,9 @@
   </head>
   <body>
     <div class="painel">
-      <div class="dias" id="dias">0</div>
+      <div class="dias neon" id="dias">0</div>
       
-      <div class="divisor-schaeffler"></div>
-
+      
       <div class="quadro" id="quadro">
         <div class="hora" id="horaAtual">
           <span id="hh">00</span>
@@ -194,14 +173,15 @@
       const DATA_INICIAL = new Date("2022-12-14T00:00:00");
 
       function atualizarPainel() {
-        const pai = document.querySelector(".quadro");
-        const filho = pai.querySelector(".hora");
-        const filho2 = pai.querySelector(".data");
-        const filho3 = document.querySelector(".dias");
+        const quadro = document.querySelector(".quadro");
+        const hora = quadro.querySelector(".hora");
+        const data = quadro.querySelector(".data");
+        const painel = document.querySelector(".painel");
+        const nDias = painel.querySelector(".dias");
 
-        filho.style.fontSize = `${quadro.clientWidth * 0.45}px`;
-        filho2.style.fontSize = `${quadro.clientWidth * 0.14}px`;
-        filho3.style.fontSize = `${quadro.clientWidth * 0.4}px`;
+        hora.style.fontSize = `${quadro.clientWidth * 0.43}px`;
+        data.style.fontSize = `${quadro.clientWidth * 0.12}px`;
+        nDias.style.fontSize = `${painel.clientWidth * 0.085}px`;
 
         const agora = new Date();
 
@@ -238,6 +218,8 @@
 
       atualizarPainel();
       
+     
+
       //runConfetti();
       // Confetti: efeito por 5 segundos, partindo do alto até embaixo
       function runConfetti() {
