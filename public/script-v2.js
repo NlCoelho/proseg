@@ -60,7 +60,14 @@ async function checarNovoDeploy() {
     const local = "https://127.0.0.1:8080/";
     const production = "https://proseg-nine.vercel.app/v2.html";
 
-    const resposta = await fetch(`${production}`, { method: "HEAD", cache: "no-cache" });
+    const resposta = await fetch(`${production}`, {
+      method: "HEAD",
+      cache: "no-cache",
+      headers: {
+        "Cache-Control": "no-cache",
+        Pragma: "no-cache", // Compatibilidade com navegadores antigos
+      },
+    });
     // A Vercel gera um mapeamento único (ETag ou x-vercel-id) para cada deploy
     const novoHash = resposta.headers.get("etag") || resposta.headers.get("x-vercel-id") || resposta.headers.get("last-modified");
 
