@@ -4,228 +4,29 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@4.1.3/tsparticles.confetti.bundle.min.js"></script>
+<link rel="stylesheet" href="styles-v2.css">
+<link rel="stylesheet" href="/ceu.css">
 <title>Painel Atitude Segura</title>
-
-<style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-body{
-    background:#000;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    min-height:100vh;
-    font-family:Segoe UI, Arial, sans-serif;
-}
-
-.painel{
-    position:relative;
-    width:max(100vw);
-    height: 100vh;
-    aspect-ratio:1600/900;
-
-    background-image:url("WhatsApp Image 2026-06-02 at 00.07.54.jpeg");
-    background-size:contain;
-    background-repeat:no-repeat;
-    background-position:center;
-}
-
-/* Número de dias */
-
-.dias{
-    position:absolute;
-    left:49%;
-    top:8.7vh;
-    font-style: italic;
-    transform:translateX(-50%);
-
-    color:#d9b178;
-
-    font-size:13vh;
-    font-weight:700;
-
-    text-shadow:
-        0 0 8px rgba(217,177,120,.6),
-        0 0 20px rgba(217,177,120,.4);
-
-    letter-spacing:2px;
-}
-
-/* Data */
-
-.data,  .dia_semana {
-    position:absolute;
-
-    left:49.6%;
-    top:53%;
-    line-height: 1.1;
-    
-    transform:translateX(-50%);
-
-    color:#d9b178;
-
-    text-align:center;
-
-    font-size: clamp(1rem, 2.7vw, 2.2rem);
-
-    font-weight:600;
-
-    text-shadow:
-        0 0 5px rgba(217,177,120,.4);
-}
-
-.dia_semana{
-    position:absolute;
-    left:49.6%;
-    top:58.6%;
-    color: #8c8c8a;
-    letter-spacing: 2px;
-
-    font-size:clamp(1vw,1.77vw,7vw);
-
-    font-weight:400;
-
-    text-shadow:
-        2px 0 5px rgba(60,65,69,.8);
-}
-
-/* Hora */
-
-.hora{
-    position:absolute;
-    font-family: 'DS-DIGITAL';
-    left:49.5%;
-    font-size:clamp(5px,7vw,10vw);
-    text-shadow:
-        0px 0px 5px rgba(90,50,10,.9);
-    top:72.8%;
-
-    transform:translateX(-50%);
-    
-    color:#d9b178;
-
-    text-align:center;
-
-    
-}
-
-div#horaAtual {
-    display: inline-flex;
-    justify-content: center;
-}
-
-span#sep{
-    padding-left: 4.5px;
-    transform: translateY(-5px);		
-}
-
-@font-face{
-    font-family: 'DS-DIGITAL';
-    src: url('ds_digital/DS-DIGI.TTF') format('truetype'),
-    src: url('ds_digital/DS-DIGII.TTF') format('truetype'),
-    src: url('ds_digital/DS-DIGIB.TTF') format('truetype'),
-    src: url('ds_digital/DS-DIGIT.TTF') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-/* Ajustes para telas menores */
-
-@media (max-width:1000px){
-
-    .dias{
-        top:10%;
-    }
-
-    .data{
-        width:25%;
-        top:55%;
-    }
-
-    .hora{
-        width:25%;
-        top:73%;
-	font-size:clamp(10px,20vw,55px);
-    }
-}
-
-</style>
 </head>
 <body>
 
-<div class="painel">
+<div class="painel sky" id="sky"">
 
     <div class="dias" id="dias">0</div>
     
-    <div class="data" id="dataAtual">01/01/2025</div>
-
-    <div class="dia_semana" id="dia_semana"></div>	
     
-    <div class="hora" id="horaAtual">
-        <span id="hh">00</span>
-        <span id="sep">:</span>
-        <span id="mm">00</span>
-    
-    </div>		
-</div>
+    <div class="quadro" id="quadro">
+        <div class="data" id="dataAtual">01/01/2025</div>
+        <div class="dia_semana" id="dia_semana"></div>	
+        <div class="divisor-schaeffler"></div>
+        <div class="hora" id="horaAtual">
+            <span id="hh">00</span>
+            <span id="sep">:</span>
+            <span id="mm">00</span>
+        </div>		
+    </div>
 
-<script>
-// DATA INICIAL DO CONTADOR
-const DATA_INICIAL = new Date("2022-12-14T00:00:00");
-
-function atualizarPainel(){
-
-    const agora = new Date();
-
-    // DATA
-    		
-    document.getElementById("dataAtual").textContent =
-        agora.toLocaleDateString("pt-BR");
-	
-    // DIA SEMANA
-    
-    const diasDaSemana = [
-        'Domingo', 'Segunda-feira', 'Terça-feira', 
-        'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
-
-    const hoje = new Date();
-
-    const numeroDia = hoje.getDay();
-    document.getElementById("dia_semana").textContent = 
-    diasDaSemana[numeroDia].toUpperCase();     
-
-
-    // HORA
-
-    document.getElementById("hh").textContent =
-        String(agora.getHours()).padStart(2, "0");
-
-    document.getElementById("mm").textContent =
-        String(agora.getMinutes()).padStart(2, "0");
-
-    document.getElementById("sep").style.opacity =
-        agora.getSeconds() % 2 === 0 ? "1" : "0";
-
-    // DIAS CORRIDOS
-    const diferenca =
-        agora.getTime() - DATA_INICIAL.getTime();
-
-    const dias =
-        Math.floor(diferenca / (1000 * 60 * 60 * 24));
-
-    document.getElementById("dias").textContent =
-        dias.toLocaleString("pt-BR") + " DIAS";
-}
-
-atualizarPainel();
-
-setInterval(atualizarPainel,1000);
-
-</script>
+<script src="script-v2.js"></script>
+<script src="script-ceu.js"></script>
 </body>
 </html>

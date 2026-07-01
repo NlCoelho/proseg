@@ -1,0 +1,80 @@
+/* Reseta margens da página */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Fundo do Espaço */
+
+.sky {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* Estilo básico de cada estrela individual */
+.star {
+  position: absolute;
+  background-color: #fff;
+  border-radius: 50%;
+  opacity: 0;
+}
+
+/* --- CRUZ REDUZIDA E DELICADA --- */
+.star.cross-flare {
+  background-color: #fff;
+  box-shadow:
+    0 0 3px #fff,
+    0 0 6px rgba(255, 255, 255, 0.6);
+}
+
+/* Linha Horizontal Menor */
+.star.cross-flare::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1px; /* Tamanho reduzido para ser discreto */
+  height: 0.5px;
+  background: linear-gradient(90deg, transparent, #fff, transparent);
+}
+
+/* Linha Vertical Menor */
+.star.cross-flare::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0.5px;
+  height: 1px; /* Tamanho reduzido para ser discreto */
+  background: linear-gradient(180deg, transparent, #fff, transparent);
+}
+
+/* --- ANIMAÇÕES COMBINADAS --- */
+/* blink: controla o sumiço e reaparecimento (fade) */
+/* scintillate: controla o tremor rápido de brilho (cintilação) */
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  15%,
+  85% {
+    opacity: 1;
+  }
+}
+
+@keyframes scintillate {
+  0%,
+  100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  50% {
+    transform: scale(1.2);
+    filter: brightness(1.6); /* Dá o pico de brilho da cintilação */
+  }
+}
