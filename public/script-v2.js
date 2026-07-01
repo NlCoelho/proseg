@@ -5,25 +5,19 @@ function atualizarPainel() {
   const pai = document.querySelector(".quadro");
   const hora = pai.querySelector(".hora");
   const data = pai.querySelector(".data");
+  const diaSem = pai.querySelector(".dia_semana");
   const nDias = document.querySelector(".dias");
 
-  hora.style.fontSize = `${quadro.clientWidth * 0.45}px`;
+  hora.style.fontSize = `${quadro.clientWidth * 0.44}px`;
   data.style.fontSize = `${quadro.clientWidth * 0.14}px`;
-  nDias.style.fontSize = `${quadro.clientWidth * 0.4}px`;
+  diaSem.style.fontSize = `${quadro.clientWidth * 0.1}px`;
+  nDias.style.fontSize = `${quadro.clientWidth * 0.42}px`;
 
   const agora = new Date();
 
   // DATA
   const options = { day: "2-digit", month: "2-digit" };
   document.getElementById("dataAtual").textContent = agora.toLocaleDateString("pt-BR", options);
-
-  // HORA
-
-  document.getElementById("hh").textContent = String(agora.getHours()).padStart(2, "0");
-
-  document.getElementById("mm").textContent = String(agora.getMinutes()).padStart(2, "0");
-
-  document.getElementById("sep").style.opacity = agora.getSeconds() % 2 === 0 ? "1" : "0";
 
   // DIA SEMANA
 
@@ -32,7 +26,15 @@ function atualizarPainel() {
   const hoje = new Date();
 
   const numeroDia = hoje.getDay();
-  document.getElementById("dataAtual").textContent = document.getElementById("dataAtual").textContent + " " + diasDaSemana[numeroDia].substring(0, 3).toUpperCase();
+  document.getElementById("dia_semana").textContent = diasDaSemana[numeroDia].toUpperCase();
+
+  // HORA
+
+  document.getElementById("hh").textContent = String(agora.getHours()).padStart(2, "0");
+
+  document.getElementById("mm").textContent = String(agora.getMinutes()).padStart(2, "0");
+
+  document.getElementById("sep").style.opacity = agora.getSeconds() % 2 === 0 ? "1" : "0";
 
   // DIAS CORRIDOS
   const diferenca = agora.getTime() - DATA_INICIAL.getTime();
@@ -45,25 +47,8 @@ function atualizarPainel() {
 
 atualizarPainel();
 
-//runConfetti();
-// Confetti: efeito por 5 segundos, partindo do alto até embaixo
-function runConfetti() {
-  confetti({
-    duration: 3000,
-    spread: 360,
-    origin: {
-      x: 0.5,
-      y: -0.5,
-    },
-    velocity: 0,
-    gravity: 0.5,
-    ticks: 8000,
-    particleCount: 8000,
-  });
-}
-
 setInterval(atualizarPainel, 1000);
-// Executa a checagem de deploy assim que abre e depois a cada 5 minutos (300000ms)
+
 setInterval(checarNovoDeploy, 36000);
 
 // Armazena a versão inicial da página (ETag ou data de modificação)
@@ -73,7 +58,7 @@ async function checarNovoDeploy() {
   try {
     // Faz uma requisição rápida apenas no cabeçalho da página para evitar consumo de dados
     const local = "https://127.0.0.1:8080/";
-    const production = "https://proseg-nine.vercel.app";
+    const production = "https://proseg-nine.vercel.app/v2.html";
 
     const resposta = await fetch(`${production}`, { method: "HEAD", cache: "no-cache" });
     // A Vercel gera um mapeamento único (ETag ou x-vercel-id) para cada deploy
